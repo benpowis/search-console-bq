@@ -2,7 +2,6 @@
 ### Getting data from Google Search Console into BigQuery with some readable Python code
 In this example code we build a finction that download data from Google Search Console and stores it in BigQuery. We can look through this function to grab lots of data for multiple properties.
 
-There are two files:
 `search_console_bq.py` contains working code with examples of looping over multiple properties, one should update the variables at the top before using.
 
 `Search console BQ 2020.ipynb` is a Jupyter notebook containing all the code, a good starting point if you want to make any changes or run through the process interactively.
