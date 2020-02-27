@@ -48,10 +48,10 @@ def get_sc_df(site_url,start_date,end_date,start_row):
         # Give the columsn sensible names
         new_cols.columns = ["page","device","keyword"]
 
-        # Get rid of quotation marks
-        new_cols['device'] = new_cols['device'].str.replace("'","").str.lower()
-        new_cols['keyword'] = new_cols['keyword'].str.replace("'","")
-        new_cols['page'] = new_cols['page'].str.replace("'","")
+        # Get rid of quotation marks and white space
+        new_cols['device'] = new_cols['device'].str.replace("'","").str.lower().str.strip()
+        new_cols['keyword'] = new_cols['keyword'].str.replace("'","").str.strip()
+        new_cols['page'] = new_cols['page'].str.replace("'","").str.strip()
 
         # Bring back a key from the intial dataframe so we can join
         new_cols['key'] = df['keys']
