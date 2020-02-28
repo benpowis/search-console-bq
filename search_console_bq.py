@@ -84,7 +84,7 @@ def get_sc_df(site_url,start_date,end_date,start_row):
         print("There are no more results to return.")
 
 # Loop through all defined properties, for up to 100,000 rows of data in each
-for p in properties:
+for p in PROPERTIES:
     for x in range(0,100000,25000):
         y = get_sc_df(p,"2020-01-01","2020-01-01",x)
         if len(y) < 25000:
