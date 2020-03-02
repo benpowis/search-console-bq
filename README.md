@@ -5,7 +5,7 @@ In this single file of Python code, we build a function that downloads data from
 ## Why use this code?
 Many examples currently shared online are outdated and make the process of downloading data from Google Search Console overly complicated (in my humble opinion). The aim of this code is to simplify the process and make it easy for anyone with a little Python knowledge to apply.
 
-Some key design principals are:
+Some highlights:
 - Easily transferable; deploy anywhere, everything can be defined in one easy to read piece of code.
 - Written in Python 3 (obviously, but many of the older code examples for Search Console are still in Python 2).
 - Grab ALL your data, using the latest increased API limit and loops to ensure we capture everything!
