@@ -34,6 +34,13 @@ Running through the notebook may help you get a better unstanding of the code an
 - Add this service account user to each Search Console property or properties that you want to download data from.
 - Edit the search_console_bq.py file and set the parameters at the top of the code, populating them with your values.
 - The code is designed to load all data to a single BigQuery table, appending each time. This table does not need to exist before the first run.
+- The code will collect all data up to 100,000 rows, if you expect to exceed this number for any given data in Search Console then you should increase this number. This won't slow you down days that have far less data, because the loop will stop once the data chunk size is less than 100%.
+
+## Loading into BigQuery
+This code, by default, will append to a single BigQuery table with each new days data. This table can quickly become huge, I would reccommend partitioning to ensure your table remains efficient (both cost and time) to access.
+
+## Further considerations
+At the time of writing Google take about 2/3 days to process Search Console data, so a request for yesterday's numbers will yeild no results. Consider this when deploying your code - you can, for example, deploy to collect data for three days ago, every day. Should Google ever speed this process up you can then adjust the code.
 
 Read more details on this code and my approach on this Medium post:
 https://medium.com/@singularbean/revisiting-google-search-console-data-into-google-bigquery-708a19e2f746
