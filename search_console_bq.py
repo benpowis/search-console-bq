@@ -28,7 +28,7 @@ def get_sc_df(site_url,start_date,end_date,start_row):
     request = {
       'startDate': start_date,
       'endDate': end_date,
-      'dimensions': ["page","device","query"], # uneditable to enforce a nice clean dataframe at the end!
+      'dimensions': ['query','device', 'page', 'date'], # uneditable to enforce a nice clean dataframe at the end!
       'rowLimit': 25000,
       'startRow': start_row
        }
@@ -40,27 +40,12 @@ def get_sc_df(site_url,start_date,end_date,start_row):
         x = response['rows']
 
         df = pd.DataFrame.from_dict(x)
-
-        # By default the keys/dimensions are in a single column, let's split them out into separate columns.
-        new_cols = df['keys'].astype(str).str.replace("[","").str.replace("]","")
-        new_cols = new_cols.str.split(pat=',',expand=True,n=2)
-
-        # Give the columsn sensible names
-        new_cols.columns = ["page","device","keyword"]
-
-        # Get rid of quotation marks and white space
-        new_cols['device'] = new_cols['device'].str.replace("'","").str.lower().str.strip()
-        new_cols['keyword'] = new_cols['keyword'].str.replace("'","").str.strip()
-        new_cols['page'] = new_cols['page'].str.replace("'","").str.strip()
-
-        # Bring back a key from the intial dataframe so we can join
-        new_cols['key'] = df['keys']
-
-        # Join in the new clean columns to our intiial data
-        result = pd.concat([new_cols,df], axis=1, join='inner')
-
+        
+        # split the keys list into columns
+        df[['query','device', 'page', 'date']] = pd.DataFrame(df['keys'].values.tolist(), index= df.index)
+        
         # Drop the key columns
-        result = result.drop(["key","keys"],axis=1)
+        result = df.drop(['keys'],axis=1)
 
         # Add a website identifier
         result['website'] = site_url
