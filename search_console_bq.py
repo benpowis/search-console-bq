@@ -17,8 +17,8 @@ credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
 service = build(
-    'webmasters',
-    'v3',
+    'searchconsole',
+    'v1',
     credentials=credentials
 )
 
