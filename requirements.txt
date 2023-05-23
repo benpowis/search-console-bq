@@ -4,4 +4,4 @@ google-auth-oauthlib==0.4.1
 google-cloud==0.34.0
 google-cloud-bigquery==1.25.0
 pandas==1.0.5
-requests==2.22.0
+requests==2.31.0
